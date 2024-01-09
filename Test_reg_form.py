@@ -44,5 +44,3 @@ def test_registration_form(browser_options):
     browser.element('.modal-body').should(have.text('Russia, Moscow'))
     browser.element('.modal-body').should(have.text('Uttar Pradesh Agra'))
 
-
-
