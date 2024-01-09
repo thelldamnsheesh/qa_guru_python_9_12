@@ -29,14 +29,16 @@ def test_registration_form(browser_options):
     browser.element('#react-select-4-input').type('Agra').press_enter()
     browser.element('[id="submit"]').perform(command.js.click)
 
+    browser.element('#example-modal-sizes-title-lg').should(have.text('Thanks for submitting the form'))
+    browser.element('.modal-body').should(have.text('Пользователь Тестовый'))
+    browser.element('.modal-body').should(have.text('Test@gmail.com'))
+    browser.element('.modal-body').should(have.text('Male'))
+    browser.element('.modal-body').should(have.text('8005553535'))
+    browser.element('.modal-body').should(have.text('13 June,1995'))
+    browser.element('.modal-body').should(have.text('Maths'))
+    browser.element('.modal-body').should(have.text('Sports'))
+    browser.element('.modal-body').should(have.text('Russia, Moscow'))
+    browser.element('.modal-body').should(have.text('Uttar Pradesh Agra'))
 
-    browser.element('[class="table-dark]').all('td').even.should(have.exact_texts(
-        'Пользователь Тестовый',
-        'Test@gmail.com',
-        'Male',
-        '8005553535',
-        '13 June,1995',
-        'Maths',
-        'Music',
-        'Russia, Moscow',
-        'Uttar Pradesh Agra'))
+
+
