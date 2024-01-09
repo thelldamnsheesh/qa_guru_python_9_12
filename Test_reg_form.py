@@ -1,18 +1,7 @@
 import os
-
-import pytest
 from selene import browser, command, have
 
 
-@pytest.fixture
-def browser_options():
-    browser.open('https://demoqa.com/automation-practice-form')
-    browser.driver.set_window_size(height=2560, width=1440)
-    # изменил масштаб, тк кнопка при 100% масштабе не видна
-    browser.driver.execute_script("document.body.style.zoom='65%'")
-
-    yield
-    browser.quit()
 def test_registration_form(browser_options):
     browser.element('[placeholder="First Name"]').type('Пользователь')
     browser.element('[placeholder="Last Name"]').type('Тестовый')
@@ -43,4 +32,3 @@ def test_registration_form(browser_options):
     browser.element('.modal-body').should(have.text('Sports'))
     browser.element('.modal-body').should(have.text('Russia, Moscow'))
     browser.element('.modal-body').should(have.text('Uttar Pradesh Agra'))
-
