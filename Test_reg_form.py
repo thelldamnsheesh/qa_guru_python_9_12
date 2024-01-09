@@ -1,3 +1,5 @@
+import os
+
 import pytest
 from selene import browser, command, have
 
@@ -11,7 +13,6 @@ def browser_options():
 
     yield
     browser.quit()
-
 def test_registration_form(browser_options):
     browser.element('[placeholder="First Name"]').type('Пользователь')
     browser.element('[placeholder="Last Name"]').type('Тестовый')
@@ -24,10 +25,13 @@ def test_registration_form(browser_options):
     browser.element('[aria-label="Choose Tuesday, June 13th, 1995"]').perform(command.js.click)
     browser.element('[id="subjectsInput"]').type('Ma').press_tab()
     browser.element('[id="hobbies-checkbox-1"]').perform(command.js.click)
+    browser.element('[id="uploadPicture"]').send_keys(os.path.abspath('mem.jpg'))
     browser.element('[id="currentAddress"]').type('Russia, Moscow')
     browser.element('#react-select-3-input').type('Uttar Pradesh').press_enter()
     browser.element('#react-select-4-input').type('Agra').press_enter()
     browser.element('[id="submit"]').perform(command.js.click)
+
+    #check
 
     browser.element('#example-modal-sizes-title-lg').should(have.text('Thanks for submitting the form'))
     browser.element('.modal-body').should(have.text('Пользователь Тестовый'))
