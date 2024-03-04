@@ -6,7 +6,7 @@ from selene import browser, command, have, by
 @allure.title('Форма регистрации студента')
 def test_registration_form():
     with allure.step('Открываем форму'):
-        browser.open('https://demoqa.com/automation-practice-form')
+        browser.open('/automation-practice-form')
 
     with allure.step('Вводим данные студента'):
         browser.element('#firstName').type('Пользователь')
