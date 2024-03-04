@@ -6,7 +6,7 @@ from selene import browser, command, have, by, be
 @allure.title('Форма регистрации студента')
 def test_registration_form():
     with allure.step('Открываем форму'):
-        browser.open('/automation-practice-form')
+        browser.open('https://demoqa.com/automation-practice-form')
 
     with allure.step("Кликаем форму регистрации"):
         browser.element('.pattern-backgound').should(have.exact_text('Practice Form')).click()
