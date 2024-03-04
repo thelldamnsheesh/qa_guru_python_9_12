@@ -8,6 +8,9 @@ from util import attach
 
 @pytest.fixture(scope='function', autouse=True)
 def setup_browser(request):
+    browser.config.base_url = 'https://demoqa.com'
+    browser.config.window_width = 1440
+    browser.config.window_height = 1860
     options = Options()
     selenoid_capabilities = {
         "browserName": "chrome",
@@ -31,13 +34,4 @@ def setup_browser(request):
     attach.add_html(browser)
     attach.add_video(browser)
 
-    browser.quit()
-
-@pytest.fixture(scope='function', autouse=True)
-def browser_options():
-    browser.config.base_url = 'https://demoqa.com'
-    browser.config.window_width = 1440
-    browser.config.window_height = 1860
-
-    yield
     browser.quit()
