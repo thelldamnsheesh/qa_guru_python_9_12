@@ -22,7 +22,6 @@ def setup_browser(request):
         command_executor=f"https://user1:1234@selenoid.autotests.cloud/wd/hub",
         options=options
     )
-    browser.config.base_url = 'https://demoqa.com'
     browser.config.driver = driver
     yield browser
 
