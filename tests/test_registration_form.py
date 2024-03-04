@@ -1,6 +1,6 @@
 import os
 import allure
-from selene import browser, command, have, by
+from selene import browser, command, have, by, be
 
 
 @allure.title('Форма регистрации студента')
@@ -9,17 +9,15 @@ def test_registration_form():
         browser.open('/automation-practice-form')
 
     with allure.step('Отключаем рекламу'):
-        browser.all('.Google_Ad').with_(timeout=10).wait_until(
-            have.size_greater_than_or_equal(3)
-        )
-        browser.all('.Google_Ad').perform(command.js.remove)
+        browser.driver.execute_script("$('footer').remove()")
+        browser.driver.execute_script("$('#fixedban').remove()")
 
     with allure.step('Вводим данные студента'):
-        browser.element('#firstName').type('Пользователь')
-        browser.element('#lastName').type('Тестовый')
-        browser.element('#userEmail').type('Test@gmail.com')
+        browser.element('#firstName').should(be.blank).with_(type_by_js=True).type('Пользователь')
+        browser.element('#lastName').should(be.blank).with_(type_by_js=True).type('Тестовый')
+        browser.element('#userEmail').should(be.blank).with_(type_by_js=True).type('Test@gmail.com')
         browser.all('[for^=gender-radio-1]').element_by(have.exact_text('Male')).click()
-        browser.element('#userNumber').type('8005553535')
+        browser.element('#userNumber').should(be.blank).with_(type_by_js=True).type('1002003040')
         browser.element('#dateOfBirthInput').click()
         browser.element('.react-datepicker__month-select').click().element(
             by.text('June')
@@ -52,29 +50,13 @@ def test_registration_form():
         browser.all('.table td:nth-child(2)').should(
             have.texts('Пользователь Тестовый',
                        'Test@gmail.com',
-                       'Test@gmail.com',
                        'Male',
                        '8005553535',
+                       '13 June,1995'
                        'Maths'
                        'Sports',
+                       'mem.jpg'
                        'Russia, Moscow',
                        'Uttar Pradesh Agra')
         )
 
-
-
-
-
-
-'''
-        browser.element('#example-modal-sizes-title-lg').should(have.text('Thanks for submitting the form'))
-        browser.element('.modal-body').should(have.text('Пользователь Тестовый'))
-        browser.element('.modal-body').should(have.text('Test@gmail.com'))
-        browser.element('.modal-body').should(have.text('Male'))
-        browser.element('.modal-body').should(have.text('8005553535'))
-        browser.element('.modal-body').should(have.text('13 June,1995'))
-        browser.element('.modal-body').should(have.text('Maths'))
-        browser.element('.modal-body').should(have.text('Sports'))
-        browser.element('.modal-body').should(have.text('Russia, Moscow'))
-        browser.element('.modal-body').should(have.text('Uttar Pradesh Agra'))
-'''
