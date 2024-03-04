@@ -8,9 +8,6 @@ def test_registration_form():
     with allure.step('Открываем форму'):
         browser.open('https://demoqa.com/automation-practice-form')
 
-    with allure.step("Кликаем форму регистрации"):
-        browser.element('.pattern-backgound').should(have.exact_text('Practice Form')).click()
-
     with allure.step('Вводим данные студента'):
         browser.element('#firstName').should(be.blank).with_(type_by_js=True).type('Пользователь')
         browser.element('#lastName').should(be.blank).with_(type_by_js=True).type('Тестовый')
