@@ -16,7 +16,7 @@ def test_registration_form():
         browser.element('#firstName').should(be.blank).with_(type_by_js=True).type('Пользователь')
         browser.element('#lastName').should(be.blank).with_(type_by_js=True).type('Тестовый')
         browser.element('#userEmail').should(be.blank).with_(type_by_js=True).type('Test@gmail.com')
-        browser.all('[for^=gender-radio-1]').element_by(have.exact_text('Male')).click()
+        browser.all('[name=gender]').element_by(have.value('Male')).element('..').click()
         browser.element('#userNumber').should(be.blank).with_(type_by_js=True).type('1002003040')
         browser.element('#dateOfBirthInput').click()
         browser.element('.react-datepicker__month-select').click().element(
