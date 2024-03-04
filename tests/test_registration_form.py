@@ -8,9 +8,8 @@ def test_registration_form():
     with allure.step('Открываем форму'):
         browser.open('/automation-practice-form')
 
-    with allure.step('Отключаем рекламу'):
-        browser.driver.execute_script("$('footer').remove()")
-        browser.driver.execute_script("$('#fixedban').remove()")
+    with allure.step("Кликаем форму регистрации"):
+        browser.element('.pattern-backgound').should(have.exact_text('Practice Form')).click()
 
     with allure.step('Вводим данные студента'):
         browser.element('#firstName').should(be.blank).with_(type_by_js=True).type('Пользователь')
