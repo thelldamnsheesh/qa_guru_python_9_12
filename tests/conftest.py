@@ -6,8 +6,10 @@ from selene import browser
 from util import attach
 
 
-@pytest.fixture(scope='function')
+@pytest.fixture(scope='function', autouse=True)
 def setup_browser(request):
+    browser.config.window_width = 1920
+    browser.config.window_height = 1080
     options = Options()
     selenoid_capabilities = {
         "browserName": "chrome",
@@ -22,6 +24,7 @@ def setup_browser(request):
         command_executor=f"https://user1:1234@selenoid.autotests.cloud/wd/hub",
         options=options
     )
+
     browser.config.driver = driver
     yield browser
 
