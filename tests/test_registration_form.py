@@ -43,6 +43,24 @@ def test_registration_form():
         browser.element('#submit').perform(command.js.click)
 
     with allure.step('Проверяем введенные данные'):
+        browser.all('.table td:nth-child(2)').should(
+            have.texts('Пользователь Тестовый',
+                       'Test@gmail.com',
+                       'Test@gmail.com',
+                       'Male',
+                       '8005553535',
+                       'Maths'
+                       'Sports',
+                       'Russia, Moscow',
+                       'Uttar Pradesh Agra')
+        )
+
+
+
+
+
+
+'''
         browser.element('#example-modal-sizes-title-lg').should(have.text('Thanks for submitting the form'))
         browser.element('.modal-body').should(have.text('Пользователь Тестовый'))
         browser.element('.modal-body').should(have.text('Test@gmail.com'))
@@ -53,3 +71,4 @@ def test_registration_form():
         browser.element('.modal-body').should(have.text('Sports'))
         browser.element('.modal-body').should(have.text('Russia, Moscow'))
         browser.element('.modal-body').should(have.text('Uttar Pradesh Agra'))
+'''
