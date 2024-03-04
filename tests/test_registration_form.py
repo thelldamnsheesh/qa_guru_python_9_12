@@ -8,6 +8,12 @@ def test_registration_form():
     with allure.step('Открываем форму'):
         browser.open('/automation-practice-form')
 
+    with allure.step('Отключаем рекламу'):
+        browser.all('.Google_Ad').with_(timeout=10).wait_until(
+            have.size_greater_than_or_equal(3)
+        )
+        browser.all('.Google_Ad').perform(command.js.remove)
+
     with allure.step('Вводим данные студента'):
         browser.element('#firstName').type('Пользователь')
         browser.element('#lastName').type('Тестовый')
