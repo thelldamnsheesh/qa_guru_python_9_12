@@ -5,6 +5,9 @@ from selene import browser, command, have, by, be
 
 @allure.title('Форма регистрации студента')
 def test_registration_form():
+    if browser.element(".fc-dialog"):
+        browser.element('.fc-button.fc-cta-consent.fc-primary-button').click()
+
     with allure.step('Открываем форму'):
         browser.open('https://demoqa.com/automation-practice-form')
 
@@ -48,10 +51,10 @@ def test_registration_form():
                        'Test@gmail.com',
                        'Male',
                        '8005553535',
-                       '13 June,1995'
-                       'Maths'
+                       '13 June,1995',
+                       'Maths',
                        'Sports',
-                       'mem.jpg'
+                       'mem.jpg',
                        'Russia, Moscow',
                        'Uttar Pradesh Agra')
         )
